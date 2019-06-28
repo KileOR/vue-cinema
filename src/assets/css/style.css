@@ -6,3 +6,7 @@ a.undecorate {
   text-decoration: inherit;
   color: inherit;
 }
+
+.v-btn {
+  margin: 0;
+}

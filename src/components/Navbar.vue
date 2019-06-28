@@ -10,8 +10,7 @@
       <v-spacer></v-spacer>
 
       <v-toolbar-items>
-        <v-btn flat class="mr-3"><router-link :to="{name: 'favorites'}" class="undecorate">Favorites</router-link></v-btn>
-      
+        <v-btn flat class="mr-3" :to="{name: 'favorites'}">Favorites</v-btn>
         <v-text-field
             hide-details
             clearable

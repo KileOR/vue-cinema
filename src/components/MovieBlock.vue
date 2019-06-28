@@ -1,17 +1,27 @@
 <template>
   <v-flex class="mb-5">
-    <router-link :to="{ name: 'movie-detail', params: {movieId: m.id}}" class="undecorate">
-      <div class="movie-card">
-      <img :src="`http://image.tmdb.org/t/p/w200/${m.poster_path}`" :alt="m.title">
-      <div class="subheading">{{ m.title }}</div>
-        <div class="grey--text genre-list">
-          <GenreComponent v-for="(genre_id, index) in m.genre_ids" :key="index" :id="genre_id"/>
-      </div>
-      </div>
-    </router-link>
-    <button @click="addToFavorite(m.id, !m.isFavorite)">
-      {{ m.isFavorite ? 'remove from favorite' : 'add to favorite' }}
-    </button>
+    <template v-if="m">
+      <router-link :to="{ name: 'movie-detail', params: {movieId: m.id}}" class="undecorate">
+        <div class="movie-card">
+        <img :src="`http://image.tmdb.org/t/p/w200/${m.poster_path}`" :alt="m.title">
+        <div class="subheading">{{ m.title }}</div>
+          <div class="grey--text genre-list">
+            <template v-if="m.genre_ids">
+              <GenreComponent v-for="(genre_id, index) in m.genre_ids" :key="index" :id="genre_id"/>
+            </template>
+            <template v-if="m.genres">
+              <GenreComponent v-for="(genre, index) in m.genres" :key="index" :id="genre.id"/>
+            </template>
+        </div>
+        </div>
+      </router-link>
+      <v-btn v-if="m.isFavorite" color="indigo" small flat icon class="white--text mt-2" @click="addToFavorite(m.id, !m.isFavorite)">
+        <v-icon>favorite</v-icon> 
+      </v-btn>
+      <v-btn v-else color="indigo" small flat icon class="white--text mt-2" @click="addToFavorite(m.id, !m.isFavorite)">
+        <v-icon>favorite_border</v-icon> 
+      </v-btn>
+    </template>
   </v-flex>
 </template>
 
