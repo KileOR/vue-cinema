@@ -5,15 +5,20 @@
     </template>
     <v-container class="mt-3">
       <v-layout row wrap>
-        <v-flex xs12 sm12 md6>
+        <v-flex xs12 sm12 md6 offset-sm3 offset-md0>
          <img :src="`http://image.tmdb.org/t/p/w400/${details.poster_path}`" alt="Poster">
         </v-flex>
-        <v-flex xs12 sm6 md6>
+        <v-flex xs12 sm6 md6 offset-sm3 offset-md0>
           <h1>{{ details.original_title }}</h1>
           <div class="grey--text">
             <span v-for="(genre, index) in details.genres" :key="index" class="mr-3">{{ genre.name }}</span>
           </div>
-          <div class="mt-5">
+          <ul class="info-list mt-3">
+            <li class="mt-1">Budget: {{ normalizeBudget }}</li>
+            <li class="mt-1">Runtime: {{ details.runtime }} min</li>
+            <li class="mt-1">Popularity: {{ details.popularity }}m</li>
+          </ul>
+          <div class="mt-3 movie-overview">
             <h2>Overview</h2>
             <p>{{ details.overview }}</p>
           </div>
@@ -34,6 +39,7 @@
 <script>
 import movieService from '@/services/movie.service'
 import MovieBlock from '@/components/MovieBlock'
+import numeral from 'numeral'
 
 export default {
   name: 'movie-detail',
@@ -49,12 +55,18 @@ export default {
   components: {
     MovieBlock
   },
+  computed: {
+    normalizeBudget() {
+      return numeral(this.details.budget).format('0.0a')
+    }
+  },
   methods: {
     loadDetailes() {
       this.responseStatus = 'loading'
       movieService.getMovieById(this.movieId)
       .then(res => {
         this.details = res
+        console.log(res)
         this.responseStatus = 'sucess'
         this.loadRecomendations()
         console.log(this.details)
@@ -78,4 +90,8 @@ export default {
 </script>
 
 <style>
+.info-list {
+  list-style-type: none;
+  padding: 0;
+}
 </style>
