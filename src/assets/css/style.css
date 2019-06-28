@@ -1,0 +1,8 @@
+* {
+  box-sizing: border-box;
+}
+
+a.undecorate {
+  text-decoration: inherit;
+  color: inherit;
+}
