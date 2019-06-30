@@ -1,4 +1,5 @@
 # vue-cinema
+# Preview: https://clever-fermat-539f3f.netlify.com
 
 ## Project setup
 ```
