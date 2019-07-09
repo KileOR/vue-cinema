@@ -1,5 +1,11 @@
 # vue-cinema
-# Preview: https://clever-fermat-539f3f.netlify.com
+## Preview: https://clever-fermat-539f3f.netlify.com
+
+Tasks:
+1) Lazy loading
+2) LocalStorage (favorites)
+3) Vuex
+4) Axios with Api
 
 ## Project setup
 ```
